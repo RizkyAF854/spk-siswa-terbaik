@@ -1,0 +1,84 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider  = "postgresql"
+}
+
+enum Role {
+  ADMIN
+  GURU
+}
+
+enum JenisKelamin {
+  LAKI_LAKI
+  PEREMPUAN
+}
+
+enum TipeKriteria {
+  BENEFIT
+  COST
+}
+
+model User {
+  id            String   @id @default(cuid())
+  username      String   @unique
+  password      String
+  plainPassword String?
+  nama          String
+  role          Role     @default(GURU)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Student {
+  id           String       @id @default(cuid())
+  nis          String       @unique
+  nama         String
+  jenisKelamin JenisKelamin
+  kelas        String
+  jurusan      String
+  tahunAjaran  String
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  assessments  Assessment[]
+  rankings     Ranking[]
+}
+
+model Criteria {
+  id          String       @id @default(cuid())
+  kode        String       @unique
+  nama        String
+  bobot       Float
+  tipe        TipeKriteria
+  assessments Assessment[]
+}
+
+model Assessment {
+  id         String   @id @default(cuid())
+  studentId  String
+  criteriaId String
+  nilai      Float
+  student    Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  criteria   Criteria @relation(fields: [criteriaId], references: [id], onDelete: Cascade)
+
+  @@unique([studentId, criteriaId])
+}
+
+model Ranking {
+  id          String   @id @default(cuid())
+  studentId   String
+  nilaiS      Float
+  nilaiV      Float
+  ranking     Int
+  tahunAjaran String
+  kelas       String   @default("")
+  status      String
+  student     Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+}
