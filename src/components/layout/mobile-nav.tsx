@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { useEffect } from "react";
 import {
   LayoutDashboard,
   Users,
@@ -17,7 +18,6 @@ import {
   GraduationCap,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { getAllowedMenuItems } from "@/lib/menu-config";
 import { signOut } from "next-auth/react";
@@ -40,11 +40,32 @@ export function MobileNav({ open, onOpenChange, userRole, userName }: MobileNavP
     onOpenChange(false);
   };
 
+  // Prevent background scroll when sidebar is open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  if (!open) return null;
+
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="fixed top-0 left-0 w-80 max-w-[85vw] h-full rounded-none border-r border-slate-800 bg-slate-900 text-white p-0 flex flex-col transition-all">
+    <div className="fixed inset-0 z-50 flex">
+      {/* Backdrop overlay */}
+      <div
+        className="fixed inset-0 bg-slate-950/60 backdrop-blur-xs transition-opacity duration-200"
+        onClick={() => onOpenChange(false)}
+      />
+
+      {/* Sidebar Panel */}
+      <div className="relative w-80 max-w-[85vw] h-full bg-slate-900 text-white flex flex-col transition-transform duration-200 border-r border-slate-800 shadow-2xl z-10 animate-[slideInLeft_0.2s_ease-out]">
         {/* Header mobile nav */}
-        <div className="h-16 flex items-center justify-between px-6 border-b border-slate-800 bg-slate-950/50">
+        <div className="h-16 flex items-center justify-between px-6 border-b border-slate-800 bg-slate-950/50 shrink-0">
           <div className="flex items-center gap-3">
             <div className="bg-blue-600 p-2 rounded-lg text-white">
               <GraduationCap className="h-5 w-5" />
@@ -91,7 +112,7 @@ export function MobileNav({ open, onOpenChange, userRole, userName }: MobileNavP
         </nav>
 
         {/* Footer profile info & logout */}
-        <div className="p-4 border-t border-slate-800 bg-slate-950/20">
+        <div className="p-4 border-t border-slate-800 bg-slate-950/20 shrink-0">
           <div className="flex items-center gap-3 mb-3">
             <div className="bg-slate-800 h-9 w-9 rounded-full flex items-center justify-center font-semibold text-sm text-slate-300 border border-slate-700">
               {userName.charAt(0).toUpperCase()}
@@ -112,7 +133,7 @@ export function MobileNav({ open, onOpenChange, userRole, userName }: MobileNavP
             Logout
           </Button>
         </div>
-      </DialogContent>
-    </Dialog>
+      </div>
+    </div>
   );
 }

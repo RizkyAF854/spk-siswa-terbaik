@@ -163,7 +163,7 @@ export default function KriteriaClient({
       </div>
 
       {/* Analytics Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         <div className="p-6 rounded-2xl flex items-center justify-between" style={{ background: "var(--card)", border: "1px solid var(--border)" }}>
           <div>
             <p className="text-sm" style={{ color: "var(--muted-foreground)" }}>Total Kriteria</p>
@@ -177,7 +177,7 @@ export default function KriteriaClient({
           </div>
         </div>
 
-        <div className="p-6 rounded-2xl flex items-center justify-between col-span-1 md:col-span-2" style={{ background: "var(--card)", border: "1px solid var(--border)" }}>
+        <div className="p-6 rounded-2xl flex items-center justify-between col-span-1 sm:col-span-2 md:col-span-2" style={{ background: "var(--card)", border: "1px solid var(--border)" }}>
           <div className="flex-1 mr-4">
             <p className="text-sm" style={{ color: "var(--muted-foreground)" }}>Total Akumulasi Bobot</p>
             <div className="flex items-center gap-2 mt-1">

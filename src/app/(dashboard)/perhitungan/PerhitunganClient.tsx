@@ -214,13 +214,13 @@ export default function PerhitunganClient({
         <div className="space-y-8">
           {/* Tabs Menu */}
           <div className="flex flex-col lg:flex-row lg:items-center justify-between border-b pb-4 gap-4" style={{ borderColor: "var(--border)" }}>
-            <div className="flex flex-wrap gap-2 p-1 bg-slate-100 dark:bg-slate-800 rounded-xl w-fit">
+            <div className="flex overflow-x-auto gap-2 p-1 bg-slate-100 dark:bg-slate-800 rounded-xl w-full lg:w-auto scrollbar-none shrink-0">
               <button
                 onClick={() => {
                   setActiveTab("matriks");
                   setShowAll(false);
                 }}
-                className={`px-4 py-2 text-xs font-semibold rounded-lg transition-all ${
+                className={`px-4 py-2 text-xs font-semibold rounded-lg transition-all whitespace-nowrap ${
                   !showAll && activeTab === "matriks"
                     ? "bg-white dark:bg-slate-900 shadow-sm text-blue-600 dark:text-blue-400 font-bold"
                     : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100"
@@ -233,7 +233,7 @@ export default function PerhitunganClient({
                   setActiveTab("vektorS");
                   setShowAll(false);
                 }}
-                className={`px-4 py-2 text-xs font-semibold rounded-lg transition-all ${
+                className={`px-4 py-2 text-xs font-semibold rounded-lg transition-all whitespace-nowrap ${
                   !showAll && activeTab === "vektorS"
                     ? "bg-white dark:bg-slate-900 shadow-sm text-blue-600 dark:text-blue-400 font-bold"
                     : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100"
@@ -246,7 +246,7 @@ export default function PerhitunganClient({
                   setActiveTab("vektorV");
                   setShowAll(false);
                 }}
-                className={`px-4 py-2 text-xs font-semibold rounded-lg transition-all ${
+                className={`px-4 py-2 text-xs font-semibold rounded-lg transition-all whitespace-nowrap ${
                   !showAll && activeTab === "vektorV"
                     ? "bg-white dark:bg-slate-900 shadow-sm text-blue-600 dark:text-blue-400 font-bold"
                     : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100"
@@ -258,7 +258,7 @@ export default function PerhitunganClient({
 
             <button
               onClick={() => setShowAll(!showAll)}
-              className={`btn ${showAll ? "btn-primary" : "btn-secondary"} flex items-center gap-2 text-xs py-2 px-4`}
+              className={`btn ${showAll ? "btn-primary" : "btn-secondary"} flex items-center gap-2 text-xs py-2 px-4 w-full lg:w-auto justify-center`}
             >
               <FileText className="w-4 h-4" />
               {showAll ? "Tampilkan Per Tahap" : "Tampilkan Semua Tahapan"}

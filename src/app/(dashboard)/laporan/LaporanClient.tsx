@@ -139,25 +139,25 @@ export default function LaporanClient({
           </p>
         </div>
         {isAdmin && (
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             <button
               onClick={handlePrint}
               disabled={students.length === 0 && rankings.length === 0}
-              className="btn btn-secondary flex items-center gap-2"
+              className="btn btn-secondary flex items-center gap-2 text-xs sm:text-sm py-1.5 px-3"
             >
               <Printer className="w-4 h-4" /> Cetak / Print
             </button>
             <button
               onClick={handleExportPDF}
               disabled={students.length === 0 && rankings.length === 0}
-              className="btn btn-secondary border-red-500/20 text-red-500 hover:bg-red-500/10 flex items-center gap-2"
+              className="btn btn-secondary border-red-500/20 text-red-500 hover:bg-red-500/10 flex items-center gap-2 text-xs sm:text-sm py-1.5 px-3"
             >
               <FileText className="w-4 h-4" /> Export PDF
             </button>
             <button
               onClick={handleExportExcel}
               disabled={students.length === 0 && rankings.length === 0}
-              className="btn btn-success flex items-center gap-2"
+              className="btn btn-success flex items-center gap-2 text-xs sm:text-sm py-1.5 px-3"
             >
               <Download className="w-4 h-4" /> Export Excel
             </button>
@@ -166,25 +166,25 @@ export default function LaporanClient({
       </div>
 
       {/* Filters Card - Hidden on Print */}
-      <div className="p-4 rounded-2xl flex flex-wrap gap-4 items-center no-print animate-fade-in" style={{ background: "var(--card)", border: "1px solid var(--border)" }}>
-        <div className="flex items-center gap-2">
-          <span className="text-sm font-medium" style={{ color: "var(--muted-foreground)" }}>Jenis Laporan:</span>
+      <div className="p-4 rounded-2xl flex flex-col sm:flex-row flex-wrap gap-4 items-stretch sm:items-center no-print animate-fade-in" style={{ background: "var(--card)", border: "1px solid var(--border)" }}>
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2 flex-1 min-w-[200px]">
+          <span className="text-sm font-medium shrink-0" style={{ color: "var(--muted-foreground)" }}>Jenis Laporan:</span>
           <select
             value={jenis}
             onChange={(e) => handleFilterChange(e.target.value as any, tahunAjaran, kelas)}
-            className="form-input py-1.5 px-3 max-w-[200px]"
+            className="form-input py-1.5 px-3 w-full sm:max-w-[200px]"
           >
             <option value="ranking">Hasil Ranking WP</option>
             <option value="penilaian">Penilaian Siswa</option>
           </select>
         </div>
 
-        <div className="flex items-center gap-2">
-          <span className="text-sm font-medium" style={{ color: "var(--muted-foreground)" }}>Tahun Ajaran:</span>
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2 flex-1 min-w-[150px]">
+          <span className="text-sm font-medium shrink-0" style={{ color: "var(--muted-foreground)" }}>Tahun Ajaran:</span>
           <select
             value={tahunAjaran}
             onChange={(e) => handleFilterChange(jenis, e.target.value, kelas)}
-            className="form-input py-1.5 px-3 max-w-[180px]"
+            className="form-input py-1.5 px-3 w-full sm:max-w-[180px]"
           >
             <option value="2025/2026">2025/2026</option>
             {tahunAjarans.filter(ta => ta !== "2025/2026").map((ta) => (
@@ -193,12 +193,12 @@ export default function LaporanClient({
           </select>
         </div>
 
-        <div className="flex items-center gap-2">
-          <span className="text-sm font-medium" style={{ color: "var(--muted-foreground)" }}>Kelas:</span>
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2 flex-1 min-w-[150px]">
+          <span className="text-sm font-medium shrink-0" style={{ color: "var(--muted-foreground)" }}>Kelas:</span>
           <select
             value={kelas}
             onChange={(e) => handleFilterChange(jenis, tahunAjaran, e.target.value)}
-            className="form-input py-1.5 px-3 max-w-[180px]"
+            className="form-input py-1.5 px-3 w-full sm:max-w-[180px]"
           >
             <option value="all">Semua Kelas</option>
             {classes.map((c) => (
@@ -210,14 +210,14 @@ export default function LaporanClient({
 
       {/* Document Report Preview */}
       <div
-        className="p-8 sm:p-12 rounded-3xl shadow-sm border mx-auto max-w-4xl bg-white text-black print:p-0 print:border-none print:shadow-none print:bg-transparent"
+        className="p-4 sm:p-8 md:p-12 rounded-3xl shadow-sm border mx-auto max-w-4xl bg-white text-black print:p-0 print:border-none print:shadow-none print:bg-transparent overflow-x-auto"
         style={{ borderColor: "var(--border)" }}
       >
         {/* Kop Surat / Letterhead */}
-        <div className="border-b-[3px] border-black pb-0.5 mb-6 text-black">
-          <div className="grid grid-cols-[120px_1fr] items-center gap-4 text-center pb-2 border-b border-black">
+        <div className="border-b-[3px] border-black pb-0.5 mb-6 text-black min-w-[600px] sm:min-w-0">
+          <div className="flex flex-col sm:grid sm:grid-cols-[120px_1fr] items-center gap-4 text-center pb-2 border-b border-black">
             {/* Logo Kiri */}
-            <div className="flex justify-center items-center">
+            <div className="flex justify-center items-center shrink-0">
               <LogoKiri />
             </div>
 

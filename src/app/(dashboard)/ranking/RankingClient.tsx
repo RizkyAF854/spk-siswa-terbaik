@@ -82,18 +82,18 @@ export default function RankingClient({
           </p>
         </div>
         {isAdmin && (
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             <button
               onClick={handleExportPDF}
               disabled={rankings.length === 0}
-              className="btn btn-secondary border-red-500/20 text-red-500 hover:bg-red-500/10 flex items-center gap-2"
+              className="btn btn-secondary border-red-500/20 text-red-500 hover:bg-red-500/10 flex items-center gap-2 text-xs sm:text-sm py-1.5 px-3"
             >
               <FileText className="w-4 h-4" /> Export PDF
             </button>
             <button
               onClick={handleExportExcel}
               disabled={rankings.length === 0}
-              className="btn btn-success flex items-center gap-2"
+              className="btn btn-success flex items-center gap-2 text-xs sm:text-sm py-1.5 px-3"
             >
               <Download className="w-4 h-4" /> Export Excel
             </button>
@@ -135,7 +135,7 @@ export default function RankingClient({
 
       {/* 3 Ringkasan Statistik Cards */}
       {rankings.length > 0 && (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {/* Card 1: Siswa Terbaik */}
           <div
             className="p-6 rounded-2xl border flex items-center justify-between bg-gradient-to-br from-amber-500/10 via-amber-600/5 to-transparent relative overflow-hidden"

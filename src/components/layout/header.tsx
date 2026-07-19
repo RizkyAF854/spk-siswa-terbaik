@@ -74,7 +74,7 @@ export function Header({ userRole, userName }: HeaderProps) {
         >
           <Menu className="h-4 w-4" />
         </Button>
-        <h2 className="text-base font-semibold text-zinc-800 dark:text-zinc-100">
+        <h2 className="text-base font-semibold text-zinc-800 dark:text-zinc-100 truncate max-w-[50vw] sm:max-w-none" title={getBreadcrumbTitle()}>
           {getBreadcrumbTitle()}
         </h2>
       </div>
